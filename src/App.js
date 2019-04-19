@@ -10,7 +10,8 @@ class App extends Component {
       {name: 'Marc', age: 40},
       {name: 'Mike', age: 50}
     ],
-    otherState: 'Will merge when using setState'
+    otherState: 'Will merge when using setState',
+    showPersons: false
   }
 
   switchNameHandler = (newName) =>{
@@ -35,6 +36,11 @@ class App extends Component {
     });
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
 
     const styleInline = {
@@ -51,17 +57,22 @@ class App extends Component {
         <p>This is really working!!!</p>
         {/* Not recommended because of less efficient */}
         <button style={styleInline}
-                onClick={() => this.switchNameHandler('## MARK ##')}>Switch Name</button>
-
-        <Person name={this.state.persons[0].name} 
-                age={this.state.persons[0].age}/>
-        {/* recommended using bind */}
-        <Person click={this.switchNameHandler.bind(this, 'MARK!!')}
-                changed={this.nameChangedHandler}
-                name={this.state.persons[1].name} 
-                age={this.state.persons[1].age}>My hobbies: Racing</Person>
-        <Person name={this.state.persons[2].name} 
-                age={this.state.persons[2].age}/>
+                onClick={this.togglePersonHandler}>Switch Name</button>
+        {
+          this.state.showPersons === true ?
+          <div>
+            <Person name={this.state.persons[0].name} 
+                    age={this.state.persons[0].age}/>
+            <Person click={this.switchNameHandler.bind(this, 'MARK!!')}
+                    changed={this.nameChangedHandler}
+                    name={this.state.persons[1].name} 
+                    age={this.state.persons[1].age}>My hobbies: Racing</Person>
+            <Person name={this.state.persons[2].name} 
+                    age={this.state.persons[2].age}/>
+          </div>
+          : null
+        }
+        
       </div>
     );
   }
