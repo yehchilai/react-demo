@@ -26,19 +26,17 @@ class App extends Component {
     });
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Mark', age: 30 },
-        { name: event.target.value, age: 40 },
-        { name: 'Mike', age: 50 }
-      ]
-    });
-  }
-
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // const personsUpdate = this.state.persons; // bad. Do not use reference
+    const personsUpdate = [...this.state.persons] // (ES6) use saperate operator. Copy before modify (immutably)
+    // const personsUpdate = this.state.persons.slice()// (Old ) Optional 
+    personsUpdate.splice(personIndex, 1);
+    this.setState({persons: personsUpdate});
   }
 
   render() {
@@ -56,8 +54,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map( person => {
+          {this.state.persons.map( (person, index) => {
             return <Person
+                    click = {() => this.deletePersonHandler(index)}
                     name = {person.name}
                     age = {person.age}/>
           })}
