@@ -6,22 +6,22 @@ class App extends Component {
 
   state = {
     persons: [
-      {name: 'Mark', age: 30},
-      {name: 'Marc', age: 40},
-      {name: 'Mike', age: 50}
+      { name: 'Mark', age: 30 },
+      { name: 'Marc', age: 40 },
+      { name: 'Mike', age: 50 }
     ],
     otherState: 'Will merge when using setState',
     showPersons: false
   }
 
-  switchNameHandler = (newName) =>{
+  switchNameHandler = (newName) => {
     // console.log('Was clicked!');
     // Do not do this: this.state.persons[0].name = 'Marry';
     this.setState({
       persons: [
-        {name: newName, age: 30},
-        {name: 'Marc', age: 40},
-        {name: 'Mike', age: 60}
+        { name: newName, age: 30 },
+        { name: 'Marc', age: 40 },
+        { name: 'Mike', age: 60 }
       ]
     });
   }
@@ -29,16 +29,16 @@ class App extends Component {
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
-        {name: 'Mark', age: 30},
-        {name: event.target.value, age: 40},
-        {name: 'Mike', age: 50}
+        { name: 'Mark', age: 30 },
+        { name: event.target.value, age: 40 },
+        { name: 'Mike', age: 50 }
       ]
     });
   }
 
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState({ showPersons: !doesShow });
   }
 
   render() {
@@ -53,18 +53,15 @@ class App extends Component {
 
     let persons = null;
 
-    if(this.state.showPersons) {
+    if (this.state.showPersons) {
       persons = (
         <div>
-            <Person name={this.state.persons[0].name} 
-                    age={this.state.persons[0].age}/>
-            <Person click={this.switchNameHandler.bind(this, 'MARK!!')}
-                    changed={this.nameChangedHandler}
-                    name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age}>My hobbies: Racing</Person>
-            <Person name={this.state.persons[2].name} 
-                    age={this.state.persons[2].age}/>
-          </div>
+          {this.state.persons.map( person => {
+            return <Person
+                    name = {person.name}
+                    age = {person.age}/>
+          })}
+        </div>
       );
     }
 
@@ -74,7 +71,7 @@ class App extends Component {
         <p>This is really working!!!</p>
         {/* Not recommended because of less efficient */}
         <button style={styleInline}
-                onClick={this.togglePersonHandler}>Switch Name</button>
+          onClick={this.togglePersonHandler}>Switch Name</button>
         {persons}
       </div>
     );
