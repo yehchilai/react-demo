@@ -36,12 +36,22 @@ class App extends Component {
   }
 
   render() {
+
+    const styleInline = {
+      backgroudColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi, this is a react project</h1>
         <p>This is really working!!!</p>
         {/* Not recommended because of less efficient */}
-        <button onClick={() => this.switchNameHandler('## MARK ##')}>Switch Name</button>
+        <button style={styleInline}
+                onClick={() => this.switchNameHandler('## MARK ##')}>Switch Name</button>
 
         <Person name={this.state.persons[0].name} 
                 age={this.state.persons[0].age}/>
