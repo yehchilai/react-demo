@@ -75,10 +75,21 @@ class App extends Component {
       styleInline.backgroundColor = 'red';
     }
 
+    // const classes = ['red', 'bold'].join(' '); // 'red bold'
+    const classes = [];
+
+    if(this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+
+    if(this.state.persons.length <=1) {
+      classes.push('bold'); // classes = ['red', 'bold']
+    }
+
     return (
       <div className="App">
         <h1>Hi, this is a react project</h1>
-        <p>This is really working!!!</p>
+        <p className={classes.join(' ')}>This is really working!!!</p>
         {/* Not recommended because of less efficient */}
         <button style={styleInline}
           onClick={this.togglePersonHandler}>Switch Name</button>
