@@ -47,16 +47,8 @@ class App extends Component {
 
   render() {
 
-    const styleInline = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -71,12 +63,12 @@ class App extends Component {
           })}
         </div>
       );
-
-      styleInline.backgroundColor = 'red';
+      btnClass = classes.red;
     }
 
     // const classes = ['red', 'bold'].join(' '); // 'red bold'
     const assignedClasses = [];
+    
 
     if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red); // classes = ['red']
@@ -91,7 +83,7 @@ class App extends Component {
         <h1>Hi, this is a react project</h1>
         <p className={assignedClasses.join(' ')}>This is really working!!!</p>
         {/* Not recommended because of less efficient */}
-        <button style={styleInline}
+        <button className={btnClass}
           onClick={this.togglePersonHandler}>Switch Name</button>
         {persons}
       </div>

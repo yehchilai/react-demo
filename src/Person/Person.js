@@ -2,11 +2,6 @@ import React from 'react';
 import classes from './Person.css'
 
 const person = (props) => {
-    // const styleInline = {
-    //     '@media (min-width: 450px)':{
-    //         width: '450px'
-    //     }
-    // };
 
     // return <p>I'm a person.I am {Math.floor(Math.random() * 30)} years old.</p>
     return (
