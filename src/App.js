@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -53,7 +54,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -73,30 +78,36 @@ class App extends Component {
       );
 
       styleInline.backgroundColor = 'red';
+      styleInline[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
 
     // const classes = ['red', 'bold'].join(' '); // 'red bold'
     const classes = [];
 
-    if(this.state.persons.length <= 2) {
+    if (this.state.persons.length <= 2) {
       classes.push('red'); // classes = ['red']
     }
 
-    if(this.state.persons.length <=1) {
+    if (this.state.persons.length <= 1) {
       classes.push('bold'); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <h1>Hi, this is a react project</h1>
-        <p className={classes.join(' ')}>This is really working!!!</p>
-        {/* Not recommended because of less efficient */}
-        <button style={styleInline}
-          onClick={this.togglePersonHandler}>Switch Name</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, this is a react project</h1>
+          <p className={classes.join(' ')}>This is really working!!!</p>
+          {/* Not recommended because of less efficient */}
+          <button style={styleInline}
+            onClick={this.togglePersonHandler}>Switch Name</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
