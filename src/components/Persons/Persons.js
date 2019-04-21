@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
 
     // there is no state in this component so we do not need this function
     // static getDerivedStateFromProps(props, state){
@@ -13,16 +13,18 @@ class Persons extends Component {
     //     console.log('[Persons.js componentWillReceivedProps]')
     // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[Persons.js] shouldComponentUpdate')
-        // Warning!! In this case, it compares two pointer(array reference), not the actual values in the array.
-        if(nextProps.persons !== this.props.persons){
-            return true;
-        }else{
-            return false;
-        }
-        // return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[Persons.js] shouldComponentUpdate')
+    //     // Warning!! In this case, it compares two pointer(array reference), not the actual values in the array.
+    //     if (nextProps.persons !== this.props.persons ||
+    //         nextProps.clicked !== this.props.clicked ||
+    //         nextProps.changed !== this.props.changed) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    //     // return true;
+    // }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate')
@@ -39,7 +41,7 @@ class Persons extends Component {
         console.log(snapshot)
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log('[Persons.js] componentWillUnmount')
     }
 
