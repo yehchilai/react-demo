@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        // http request.......
+        setTimeout(()=>{
+            alert('Data has udpated...');
+        }, 1000);
+    }, []);
+
+    // Can have multiple useEffcet functions
+    // useEffect(() => {
+    //     // console.log('[Cockpit.js] useEffect');
+    //     // http request.......
+    //     setTimeout(()=>{
+    //         alert('Persons has udpated...');
+    //     }, 1000);
+    // }, [props.persons]);
 
     // const classes = ['red', 'bold'].join(' '); // 'red bold'
     const assignedClasses = [];
