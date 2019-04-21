@@ -6,10 +6,23 @@ const cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         // http request.......
-        setTimeout(()=>{
+        const timer = setTimeout(()=>{
             alert('Data has udpated...');
         }, 1000);
+
+        return () => {
+            clearTimeout(timer); 
+            console.log('[Cockpit.js] cleanup works in useEffect.')
+        }
     }, []);
+
+    useEffect(()=>{
+        console.log('[Cockpit.js] 2nd useEffect');
+
+        return () => {
+            console.log('[Cockpit.js] cleanup works in 2nd useEffect.')
+        }
+    });
 
     // Can have multiple useEffcet functions
     // useEffect(() => {

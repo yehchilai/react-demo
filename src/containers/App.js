@@ -19,7 +19,8 @@ class App extends Component {
       { id: 'opjpj', name: 'Mike', age: 50 }
     ],
     otherState: 'Will merge when using setState',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -36,12 +37,12 @@ class App extends Component {
     console.log('[App.js] componentDidMount');
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log('[App.js] shouldComponentUpdate');
     // if return false, it won't update the components.
     return true
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('[App.js] componentDidUpdate');
   }
   nameChangeHandler = (event, id) => {
@@ -90,11 +91,12 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          title = {this.props.appTitle}
+        <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove Cockpit</button>
+        {this.state.showCockpit ? (<Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
-          persons = {this.state.persons}
-          clicked={this.togglePersonHandler} />
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler} />) : null}
         {persons}
       </div>
     );
