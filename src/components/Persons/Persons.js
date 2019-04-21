@@ -15,7 +15,13 @@ class Persons extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate')
-        return true;
+        // Warning!! In this case, it compares two pointer(array reference), not the actual values in the array.
+        if(nextProps.persons !== this.props.persons){
+            return true;
+        }else{
+            return false;
+        }
+        // return true;
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {

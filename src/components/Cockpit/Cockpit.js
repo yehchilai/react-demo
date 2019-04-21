@@ -6,12 +6,11 @@ const cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         // http request.......
-        const timer = setTimeout(()=>{
+        setTimeout(()=>{
             alert('Data has udpated...');
         }, 1000);
 
         return () => {
-            clearTimeout(timer); 
             console.log('[Cockpit.js] cleanup works in useEffect.')
         }
     }, []);
@@ -41,17 +40,17 @@ const cockpit = (props) => {
         btnClass = classes.red;
     }
 
-    if (props.showPersons.length <= 2) {
+    if (props.persons.length <= 2) {
         assignedClasses.push(classes.red); // classes = ['red']
     }
 
-    if (props.showPersons.length <= 1) {
+    if (props.persons.length <= 1) {
         assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     return (
         <div className={classes.Cockpit}>
-            <h1>Hi, this is a react project</h1>
+            <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>This is really working!!!</p>
             {/* Not recommended because of less efficient */}
             <button className={btnClass}
