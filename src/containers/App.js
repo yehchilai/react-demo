@@ -5,6 +5,13 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    // also can setup the initial state
+    // this.state = {};
+  }
+
   state = {
     persons: [
       { id: 'ldfjk', name: 'Mark', age: 30 },
@@ -13,6 +20,20 @@ class App extends Component {
     ],
     otherState: 'Will merge when using setState',
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps');
+    return state
+  }
+
+  // This life cycle may be removed in the future because it is easily misused.
+  // componentWillMount(){
+  //   console.log('[App.js] componentWillMount');
+  // }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   nameChangeHandler = (event, id) => {
@@ -47,9 +68,9 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
 
     let persons = null;
-
 
     if (this.state.showPersons) {
       persons = <Persons
@@ -62,8 +83,8 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
-          showPersons={this.state.showPersons} 
-          clicked = {this.togglePersonHandler}/>
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonHandler} />
         {persons}
       </div>
     );
