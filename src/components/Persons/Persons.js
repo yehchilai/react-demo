@@ -20,7 +20,7 @@ class Persons extends Component {
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate')
-        return { snapshot: 'message.....' }
+        return { message: 'snapshot.....' }
     }
 
     // This is easily used incorrectly so will be removed in the future.
