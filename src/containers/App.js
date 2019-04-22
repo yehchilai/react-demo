@@ -23,7 +23,8 @@ class App extends Component {
     ],
     otherState: 'Will merge when using setState',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCount: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -63,7 +64,17 @@ class App extends Component {
     const personsUpdate = [...this.state.persons];
     personsUpdate[personIndex] = person;
 
-    this.setState({ persons: personsUpdate });
+    // Bad way to update the state
+    // this.setState({ persons: personsUpdate, 
+    //   changeCount: this.state.changeCount +1 });
+
+    // Correct way to update state
+    this.setState((prevState, prevProps) => {
+      return {
+        persons: personsUpdate,
+        changeCount: prevState.changeCount + 1
+      }
+    });
   }
 
   togglePersonHandler = () => {
@@ -94,7 +105,7 @@ class App extends Component {
 
     return (
       <Aux>
-      {/* // <WithClass classes={classes.App}> */}
+        {/* // <WithClass classes={classes.App}> */}
         <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove Cockpit</button>
         {this.state.showCockpit ? (<Cockpit
           title={this.props.appTitle}
@@ -102,7 +113,7 @@ class App extends Component {
           personsLength={this.state.persons.length}
           clicked={this.togglePersonHandler} />) : null}
         {persons}
-      {/* // </WithClass> */}
+        {/* // </WithClass> */}
       </Aux>
     );
   }
