@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+
+    const toggleBtn = useRef(null);
 
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
@@ -9,7 +11,7 @@ const cockpit = (props) => {
         // setTimeout(()=>{
         //     alert('Data has udpated...');
         // }, 1000);
-
+        toggleBtn.current.click();
         return () => {
             console.log('[Cockpit.js] cleanup works in useEffect.')
         }
@@ -53,7 +55,7 @@ const cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>This is really working!!!</p>
             {/* Not recommended because of less efficient */}
-            <button className={btnClass}
+            <button ref={toggleBtn} className={btnClass}
                 onClick={props.clicked}>Switch Name</button>
         </div>
     );
