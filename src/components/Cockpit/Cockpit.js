@@ -6,9 +6,9 @@ const cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         // http request.......
-        setTimeout(()=>{
-            alert('Data has udpated...');
-        }, 1000);
+        // setTimeout(()=>{
+        //     alert('Data has udpated...');
+        // }, 1000);
 
         return () => {
             console.log('[Cockpit.js] cleanup works in useEffect.')
