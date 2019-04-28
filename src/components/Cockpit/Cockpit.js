@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import classes from './Cockpit.css';
 import AuthContext from '../../context/Auth-Context'
 
 const cockpit = (props) => {
 
     const toggleBtn = useRef(null);
+
+    const authContext = useContext(AuthContext);
+
+    console.log('Cockpit context: ' + authContext.isAuthenticated);
 
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
@@ -18,7 +22,7 @@ const cockpit = (props) => {
         }
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log('[Cockpit.js] 2nd useEffect');
 
         return () => {
@@ -58,10 +62,7 @@ const cockpit = (props) => {
             {/* Not recommended because of less efficient */}
             <button ref={toggleBtn} className={btnClass}
                 onClick={props.clicked}>Switch Name</button>
-            <AuthContext.Consumer>
-                {(context)=> <button onClick={context.login}>Log in</button>}
-            </AuthContext.Consumer>
-            
+            <button onClick={authContext.login}>Log in</button>
         </div>
     );
 

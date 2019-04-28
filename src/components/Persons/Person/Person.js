@@ -12,12 +12,15 @@ class Person extends Component {
         this.elementRef = React.createRef()
     }
 
+    static contextType = AuthContext;
+
     componentDidMount() {
         // old way to use ref. Support all version
         //this.element.focus();
 
         // new way to use red. Support 16.3+
         this.elementRef.current.focus();
+        console.log('Person context: ' + this.context.isAuthenticated);
     }
 
     render() {
@@ -26,9 +29,7 @@ class Person extends Component {
         // (hoc) use higher order component
         return (
             <Aux>
-                <AuthContext.Consumer>
-                    {(context)=> context.isAuthenticated ? <p>Authenticated!!</p> : <p>Please Login.</p>}
-                </AuthContext.Consumer>
+                {this.context.isAuthenticated ? <p>Authenticated!!</p> : <p>Please Login.</p>}
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old.</p>
                 <p>{this.props.children}</p>
                 <input type='text'
