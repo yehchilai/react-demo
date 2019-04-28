@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import classes from './Person.css'
-import Aux from '../../../hoc/Auxiliary'
-import withClass from '../../../hoc/withClassOther'
-import PropTypes from 'prop-types'
+import classes from './Person.css';
+import Aux from '../../../hoc/Auxiliary';
+import withClass from '../../../hoc/withClassOther';
+import PropTypes from 'prop-types';
+import AuthContext from '../../../context/Auth-Context';
 
 class Person extends Component {
 
@@ -25,7 +26,9 @@ class Person extends Component {
         // (hoc) use higher order component
         return (
             <Aux>
-                {this.props.isAuth ? <p>Authenticated!!</p> : <p>Please Login.</p>}
+                <AuthContext.Consumer>
+                    {(context)=> context.isAuthenticated ? <p>Authenticated!!</p> : <p>Please Login.</p>}
+                </AuthContext.Consumer>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old.</p>
                 <p>{this.props.children}</p>
                 <input type='text'

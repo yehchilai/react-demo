@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+// import WithClass from '../hoc/WithClass';
 import Aux from '../hoc/Auxiliary'
-import withClass from '../hoc/withClassOther'
+import withClass from '../hoc/withClassOther';
+import AuthContext from '../context/Auth-Context'
 
 class App extends Component {
 
@@ -92,7 +93,8 @@ class App extends Component {
   }
 
   loginHandler = () => {
-    this.setState({isAuthenticated: true});
+    console.log('login............');
+    this.setState({ isAuthenticated: true });
   }
 
   render() {
@@ -104,8 +106,8 @@ class App extends Component {
       persons = <Persons
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
-        changed={this.nameChangeHandler} 
-        isAuthenticated={this.state.isAuthenticated}/>;
+        changed={this.nameChangeHandler}
+        isAuthenticated={this.state.isAuthenticated} />;
 
     }
 
@@ -113,13 +115,17 @@ class App extends Component {
       <Aux>
         {/* // <WithClass classes={classes.App}> */}
         <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove Cockpit</button>
-        {this.state.showCockpit ? (<Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler} 
-          login={this.loginHandler}/>) : null}
-        {persons}
+        <AuthContext.Provider value={{ isAuthenticated: this.state.isAuthenticated, login: this.loginHandler }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonHandler} />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
+
         {/* // </WithClass> */}
       </Aux>
     );
