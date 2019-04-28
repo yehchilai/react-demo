@@ -57,6 +57,7 @@ const cockpit = (props) => {
             {/* Not recommended because of less efficient */}
             <button ref={toggleBtn} className={btnClass}
                 onClick={props.clicked}>Switch Name</button>
+            <button onClick={props.login}>Log in</button>
         </div>
     );
 

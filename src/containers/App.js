@@ -24,7 +24,8 @@ class App extends Component {
     otherState: 'Will merge when using setState',
     showPersons: false,
     showCockpit: true,
-    changeCount: 0
+    changeCount: 0,
+    isAuthenticated: false
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -90,6 +91,10 @@ class App extends Component {
     this.setState({ persons: personsUpdate });
   }
 
+  loginHandler = () => {
+    this.setState({isAuthenticated: true});
+  }
+
   render() {
     console.log('[App.js] render');
 
@@ -99,7 +104,8 @@ class App extends Component {
       persons = <Persons
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
-        changed={this.nameChangeHandler} />;
+        changed={this.nameChangeHandler} 
+        isAuthenticated={this.state.isAuthenticated}/>;
 
     }
 
@@ -111,7 +117,8 @@ class App extends Component {
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler} />) : null}
+          clicked={this.togglePersonHandler} 
+          login={this.loginHandler}/>) : null}
         {persons}
         {/* // </WithClass> */}
       </Aux>
